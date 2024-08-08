@@ -17,6 +17,8 @@ This adjustment ensures that all CTRL shortcuts, such as `Ctrl+C` for copy and `
 
 This script is experimental and may not work with all keyboard layouts (or any, as of the moment of writing this readme).
 
+It is also known, that layout with shortcuts, fixed with this method may not work the same way in many programs. This depends on the way program checks for shortcuts, but all common system shortcuts, such as copy/paste should work properly. I'm still trying to find a way to fix it.
+
 ## What is an MSKLC file?
 
 An MSKLC file is a file format used by the Microsoft Keyboard Layout Creator tool to define custom keyboard layouts. You can compile and test your custom layouts using the MSKLC tool.
