@@ -33,7 +33,7 @@ While this is not directly related to `qwertyfier`, it is an essential step in t
 
 If you want your CAPSLOCK key to act as BACKSPACE and eliminate its default behavior, follow these steps:
 
-1. **Download the files from the BACKSPACE FIX folder** and replace the corresponding file in the Microsoft Keyboard Layout Creator (MSKLC) installation folder.
+1. **Download the files from the [BACKSPACE FIX](https://github.com/dphdmn/qwertyfier/tree/main/BACKSPACE%20FIX) folder** and replace the corresponding file in the Microsoft Keyboard Layout Creator (MSKLC) installation folder.
 2. After making this change, you can build layouts using this modified version of the program as usual.
 
 If you encounter any issues, ensure that you have installed MSKLC to `C:/MSKLC`. The file you need to replace will be located at `C:/MSKLC/inc/kbd.h`. Note that this program is very sensitive to spaces (see [this Stack Overflow discussion](https://stackoverflow.com/a/60048017)).
