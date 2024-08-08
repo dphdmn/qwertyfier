@@ -23,26 +23,35 @@ def read_file_with_encoding(file_path):
 
 lines, encoding = read_file_with_encoding(input_file)
 in_layout_section = False
+first_line_detected = False
 vk_index = 0
 
 with open(output_file, 'w', encoding=encoding) as outfile:
     for line in lines:
-        if line.strip() == "LAYOUT":
+        if line.startswith("LAYOUT"):
+            print("Layout found")
             in_layout_section = True
+            outfile.write(line)  # Write the LAYOUT line unchanged
             continue
         
         if in_layout_section:
-            if line.startswith("02"):
+            if line.startswith("02") and not first_line_detected:
+                print("First line of layout detected, starting replacement from next line.")
+                first_line_detected = True  # Mark that we've detected the starting point
+            
+            if first_line_detected:
+                print("Replacing line after the first '02'")
                 match = re.match(r'(\S+)\s+(\S+)(.*)', line)
                 if match and vk_index < len(new_vks):
-                    new_line = f"{match.group(1)}\t{new_vks[vk_index]}{match.group(3)}"
+                    new_line = f"{match.group(1)}\t{new_vks[vk_index]}{match.group(3)}\n"
                     vk_index += 1
                 else:
-                    new_line = line
+                    new_line = line  # Fallback to original line if no match
             else:
-                new_line = line
+                new_line = line  # Write lines before the first "02" unchanged
+        
         else:
-            new_line = line
+            new_line = line  # Write lines before LAYOUT unchanged
         
         outfile.write(new_line)
 
