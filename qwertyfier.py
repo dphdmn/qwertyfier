@@ -27,14 +27,18 @@ vk_index = 0
 
 with open(output_file, 'w', encoding=encoding) as outfile:
     for line in lines:
-        if "DIGIT ONE, EXCLAMATION MARK" in line:
+        if line.strip() == "LAYOUT":
             in_layout_section = True
+            continue
         
         if in_layout_section:
-            match = re.match(r'(\S+)\s+(\S+)(.*)', line)
-            if match and vk_index < len(new_vks):
-                new_line = f"{match.group(1)}\t{new_vks[vk_index]}{match.group(3)}\n"
-                vk_index += 1
+            if line.startswith("02"):
+                match = re.match(r'(\S+)\s+(\S+)(.*)', line)
+                if match and vk_index < len(new_vks):
+                    new_line = f"{match.group(1)}\t{new_vks[vk_index]}{match.group(3)}"
+                    vk_index += 1
+                else:
+                    new_line = line
             else:
                 new_line = line
         else:
